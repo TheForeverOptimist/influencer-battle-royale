@@ -1,6 +1,6 @@
 <%- include('./partials/header.ejs') %>
 <body>
-    <form method="POST" action="/update/<%= carToUpdate.name %>?_method=PUT">
+    <form method="POST" action="/update/<%= personToUpdate.name %>?_method=PUT">
     <label for="name">Name: (previously: <%= personToUpdate.name %>)</label>
     <input name= 'name' type="text">
 
