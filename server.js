@@ -34,12 +34,20 @@ app.use(methodOverride('_method'))
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }))
 
-app.get('/', (req,res) => {
-    res.render('home.ejs');
+app.get('/', async(req,res) => {
+    try {
+        const db = await Influencer.insertmany(samples)
+        res.render('home.ejs');
+        console.log('Successful Seeding');
+    } catch(error) {
+        console.log(error)
+        next();
+    }
+    
 })
 
 
-app.use('/influencers', influencerController);
+// app.use('/influencers', influencerController);
 // app.get('/influencers', (req,res) => {
 //     res.render('influencers.ejs');
 // })
