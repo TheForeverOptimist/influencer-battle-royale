@@ -1,0 +1,24 @@
+{
+  "name": "battle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheForeverOptimist/influencer-battle-royale.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheForeverOptimist/influencer-battle-royale/issues"
+  },
+  "homepage": "https://github.com/TheForeverOptimist/influencer-battle-royale#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
