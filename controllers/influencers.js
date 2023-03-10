@@ -27,6 +27,9 @@ router.get('/influencers', (req, res) => {
     res.render('influencers/index.ejs', {influencers: influencers});
 })
 
-// router.get
+router.get('/influencers/:influencerIndex', (req, res) => {
+    console.log(req.params);
+    res.send(`<h2>${influencers[req.params.influencerIndex].name}</h2>`);
+})
 
 module.exports = router;
