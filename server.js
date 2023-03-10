@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.get('/', async(req,res) => {
     try {
-        const db = await Influencer.insertmany(samples)
+        const db = await Influencer.insertMany(samples)
         res.render('home.ejs');
         console.log('Successful Seeding');
     } catch(error) {
@@ -46,6 +46,61 @@ app.get('/', async(req,res) => {
     
 })
 
+app.get('/influencerList', async(req, res, next) => {
+    try{
+        const all = await Influencer.find({})
+        console.log(all);
+        res.render('influencerlist.ejs', {people: all})
+    } catch(error) {
+        console.log(error)
+        next()
+    }
+   
+})
+
+
+app.get('/addInfluencer', (req, res) => {
+    res.render('addinfluencer.ejs');
+})
+
+app.get('/delete/:name', async(req, res, next) => {
+    try{
+        let deletePerson = await Influencer.deleteOne({name: req.params.name})
+        console.log('successfully deleted');
+        res.redirect('/');
+    } catch(error){
+        console.log(error);
+        next();
+    }
+
+})
+
+app.get('/update/:name', async(req, res, next) => {
+    try{
+    let personToUpdate = await Influencer.findOne({name: req.params.name})
+    res.render('update.ejs', {personToUpdate: personToUpdate});
+    }catch(error) {
+        console.log(error)
+        next()
+    }
+})
+
+app.put('/update/:name', async(req, res, next) => {
+    try{
+        let influencerToDB = await Influencer.findOneAndUpdate({name: req.params.name}, {
+            $set:{
+                'name': req.body.name,
+                'category': req.body.category,
+                'followerCount': req.body.followerCount,
+                'networth': req.body.networth
+                }}, 
+                {new: true});
+        res.redirect('/');
+    }catch(error) {
+        console.log(error);
+        next();
+    }
+});
 
 // app.use('/influencers', influencerController);
 // app.get('/influencers', (req,res) => {
@@ -55,6 +110,22 @@ app.get('/*', (req,res) => {
     res.render('404.ejs');
 })
 
+app.post('/createInfluencer', async(req, res, next) => {
+    try{
+        let newPerson = await Influencer.create({
+            'name': req.body.name,
+            'category': req.body.category,
+            'followerCount': req.body.followerCount,
+            'networth': req.body.networth
+            }
+        )
+        console.log('successfully inserted new person');
+        res.redirect('/')
+    }catch(error){
+        console.log(error);
+        next()
+    }
+})
 
 
 app.listen(4000, () => {

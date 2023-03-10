@@ -1,0 +1,13 @@
+<%- include('./partials/header.ejs') %>
+<body>
+    <h1>Total Influencer List</h1>
+    <% people.forEach((people) => { %>
+        <h3>Name: <%= people.name %></h3>
+        <h3>Category: <%= people.model %></h3>
+        <h3>Follower Count: <%= people.followerCount %></h3>
+        <h3>Networth: <%= people.networth %></h3>
+        <a href='/delete/<%= people.name %>'><button>Delete</button></a>
+        <a href='/update/<%= people.name %>'><button>Update!</button></a>
+        <hr>
+   <% }) %>
+</body>

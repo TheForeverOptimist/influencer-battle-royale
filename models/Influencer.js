@@ -11,4 +11,4 @@ const influencerSchema = new mongoose.Schema(
 })
 const Influencer = mongoose.model('influencerCollection', influencerSchema);
 
-module.exports = Supercar
+module.exports = Influencer
