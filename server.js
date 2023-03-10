@@ -8,6 +8,10 @@ const influencerController = require('./controllers/influencers')
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
+app.use(methodOverride('_method'))
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false }))
+
 app.get('/', (req,res) => {
     res.render('home.ejs');
 })
